@@ -29,6 +29,10 @@ class FloatingLoggerConfig {
   /// Margin from screen edges when snapping
   final double edgeMargin;
 
+  /// Optional page title to display in the logger UI
+  /// This can be used to provide a different page title than the logger page.
+  final String? pageTitle;
+
   const FloatingLoggerConfig({
     this.backgroundColor = Colors.deepPurple,
     this.icon = Icons.developer_mode,
@@ -39,6 +43,7 @@ class FloatingLoggerConfig {
     this.initialPosition,
     this.autoSnapToEdges = true,
     this.edgeMargin = 20.0,
+    this.pageTitle
   });
 
   /// Create a copy with updated fields

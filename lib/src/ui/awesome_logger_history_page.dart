@@ -24,6 +24,9 @@ class AwesomeLoggerHistoryPage extends StatefulWidget {
   /// Default main filter to be selected when opening the logger history page
   final LogSource? defaultMainFilter;
 
+  /// App bar title (optional, defaults to 'Awesome Flutter Logger')
+  final String title;
+
   /// Static flag to track if logger is currently open
   static bool _isLoggerOpen = false;
 
@@ -34,6 +37,7 @@ class AwesomeLoggerHistoryPage extends StatefulWidget {
     super.key,
     this.showFilePaths = true,
     this.defaultMainFilter,
+    this.title = 'Awesome Flutter Logger',
   });
 
   @override
@@ -266,8 +270,8 @@ class _AwesomeLoggerHistoryPageState extends State<AwesomeLoggerHistoryPage> {
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: const Color(
-                                  0x1F000000), // Semi-transparent black for subtle background
+                              color: const Color(0x1F000000),
+                              // Semi-transparent black for subtle background
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: const Color(
@@ -389,8 +393,8 @@ class _AwesomeLoggerHistoryPageState extends State<AwesomeLoggerHistoryPage> {
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(
-                                  0x1F2196F3), // Semi-transparent blue for primary container background
+                              color: const Color(0x1F2196F3),
+                              // Semi-transparent blue for primary container background
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
@@ -554,10 +558,12 @@ class _AwesomeLoggerHistoryPageState extends State<AwesomeLoggerHistoryPage> {
             ? Colors.blue[900]!
             : hasAvailableItems
                 ? const Color(0x1A0000FF) // blue with 10% opacity
-                : Colors.grey[200], // grey background when no items
+                : Theme.of(context).colorScheme.surfaceContainer,
+        // grey background when no items
         foregroundColor: hasAvailableItems
             ? (hasSelection ? Colors.white : Colors.blue[900]!)
-            : Colors.grey[500], // grey text when disabled
+            : Colors.grey[500],
+        // grey text when disabled
         elevation: 0,
       ),
     );
@@ -574,10 +580,7 @@ class _AwesomeLoggerHistoryPageState extends State<AwesomeLoggerHistoryPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Awesome Flutter Logger',
-          style: TextStyle(fontSize: 14),
-        ),
+        title: Text(widget.title, style: TextStyle(fontSize: 14)),
         actions: [
           IconButton(
             icon: Icon(_isLoggingPaused ? Icons.play_arrow : Icons.pause),
@@ -587,7 +590,6 @@ class _AwesomeLoggerHistoryPageState extends State<AwesomeLoggerHistoryPage> {
           IconButton(
             icon: const Icon(
               Icons.settings,
-              color: Colors.blueAccent,
             ),
             onPressed: _showSettingsModal,
             tooltip: 'Settings',

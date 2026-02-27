@@ -12,7 +12,7 @@ void main() {
       expect(config.showFilePaths, true);
       expect(config.showEmojis, true);
       expect(config.useColors, true);
-      expect(config.stackTraceLines, 0);
+      expect(config.methodCount, 0);
       expect(config.enableCircularBuffer, true);
       expect(config.defaultMainFilter, null);
     });
@@ -23,7 +23,7 @@ void main() {
         showFilePaths: false,
         showEmojis: false,
         useColors: false,
-        stackTraceLines: 5,
+        methodCount: 5,
         enableCircularBuffer: false,
         defaultMainFilter: LogSource.api,
       );
@@ -32,7 +32,7 @@ void main() {
       expect(config.showFilePaths, false);
       expect(config.showEmojis, false);
       expect(config.useColors, false);
-      expect(config.stackTraceLines, 5);
+      expect(config.methodCount, 5);
       expect(config.enableCircularBuffer, false);
       expect(config.defaultMainFilter, LogSource.api);
     });

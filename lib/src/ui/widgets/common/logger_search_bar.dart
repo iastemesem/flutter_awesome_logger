@@ -38,7 +38,7 @@ class LoggerSearchBar extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: hintText,
                 filled: true,
-                fillColor: Colors.grey[100],
+                fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
                 prefixIcon: const Icon(Icons.search, size: 20),
                 suffixIcon: searchQuery.isNotEmpty
                     ? IconButton(

@@ -92,7 +92,7 @@ class _LogEntryWidgetState extends State<LogEntryWidget> {
             width: double.infinity,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
               border: Border(
                 top: BorderSide(color: Colors.grey[200]!),
               ),
@@ -151,7 +151,7 @@ class _LogEntryWidgetState extends State<LogEntryWidget> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(color: Colors.grey[300]!),
                   ),

@@ -128,7 +128,7 @@ class _ClassFilterBottomSheetState extends State<ClassFilterBottomSheet> {
                 icon,
                 size: 16,
                 color: isSelected
-                    ? Theme.of(context).colorScheme.primary
+                    ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               const SizedBox(width: 4),
@@ -138,7 +138,7 @@ class _ClassFilterBottomSheetState extends State<ClassFilterBottomSheet> {
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                   color: isSelected
-                      ? Theme.of(context).colorScheme.primary
+                      ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),

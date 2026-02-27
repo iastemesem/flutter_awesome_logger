@@ -24,7 +24,7 @@ class AwesomeLoggerConfig {
   final bool useColors;
 
   /// Number of stack trace lines to show (0 = none)
-  final int stackTraceLines;
+  final int methodCount;
 
   /// Whether to enable circular buffer behavior.
   ///
@@ -37,14 +37,19 @@ class AwesomeLoggerConfig {
   /// If null, no main filter will be pre-selected (shows all logs)
   final LogSource? defaultMainFilter;
 
+  /// DateTime format for log timestamps in console output
+  /// Default is DateTimeFormat.none
+  final DateTimeFormatter dateTimeFormatter;
+
   const AwesomeLoggerConfig({
     this.maxLogEntries = 1000,
     this.showFilePaths = true,
     this.showEmojis = true,
     this.useColors = true,
-    this.stackTraceLines = 0,
+    this.methodCount = 0,
     this.enableCircularBuffer = true,
     this.defaultMainFilter,
+    this.dateTimeFormatter = DateTimeFormat.none,
   });
 
   /// Create a copy with updated fields
@@ -53,7 +58,7 @@ class AwesomeLoggerConfig {
     bool? showFilePaths,
     bool? showEmojis,
     bool? useColors,
-    int? stackTraceLines,
+    int? methodCount,
     bool? enableCircularBuffer,
     LogSource? defaultMainFilter,
   }) {
@@ -62,7 +67,7 @@ class AwesomeLoggerConfig {
       showFilePaths: showFilePaths ?? this.showFilePaths,
       showEmojis: showEmojis ?? this.showEmojis,
       useColors: useColors ?? this.useColors,
-      stackTraceLines: stackTraceLines ?? this.stackTraceLines,
+      methodCount: methodCount ?? this.methodCount,
       enableCircularBuffer: enableCircularBuffer ?? this.enableCircularBuffer,
       defaultMainFilter: defaultMainFilter ?? this.defaultMainFilter,
     );
@@ -155,11 +160,11 @@ class LoggingUsingLogger {
     _config = config;
     _logger = Logger(
       printer: PrettyPrinter(
-        methodCount: config.stackTraceLines,
+        methodCount: config.methodCount,
         colors: config.useColors,
         printEmojis: config.showEmojis,
         lineLength: 120,
-        dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+        dateTimeFormat: config.dateTimeFormatter,
       ),
     );
   }
@@ -184,7 +189,7 @@ class LoggingUsingLogger {
   static Logger get _loggerInstance {
     return _logger ??= Logger(
       printer: PrettyPrinter(
-        methodCount: _config.stackTraceLines,
+        methodCount: _config.methodCount,
         colors: _config.useColors,
         printEmojis: _config.showEmojis,
         lineLength: 120,
@@ -325,7 +330,8 @@ class LoggingUsingLogger {
     final entry = LogEntry(
       message: message,
       filePath: filePath,
-      source: source, // Explicit source name (if provided)
+      source: source,
+      // Explicit source name (if provided)
       level: level,
       timestamp: DateTime.now(),
       stackTrace: stackTrace,

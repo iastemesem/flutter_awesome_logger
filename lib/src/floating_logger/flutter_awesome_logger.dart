@@ -716,6 +716,7 @@ return MaterialApp(
           builder: (context) => AwesomeLoggerHistoryPage(
             showFilePaths: widget.config.showFilePaths,
             defaultMainFilter: widget.loggerConfig?.defaultMainFilter,
+            title: widget.config.pageTitle ?? 'Flutter Awesome Logger',
           ),
         ),
       );

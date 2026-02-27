@@ -40,13 +40,13 @@ class LogExpandedContent extends StatelessWidget {
         // View selector chips
         Row(
           children: [
-            _buildViewChip('Request', 'request'),
+            _buildViewChip('Request', 'request', context),
             const SizedBox(width: 8),
             if (log.apiLogEntry!.type != ApiLogType.pending)
-              _buildViewChip('Response', 'response'),
+              _buildViewChip('Response', 'response', context),
             if (log.apiLogEntry!.type != ApiLogType.pending)
               const SizedBox(width: 8),
-            _buildViewChip('Curl', 'curl'),
+            _buildViewChip('Curl', 'curl', context),
           ],
         ),
         const SizedBox(height: 12),
@@ -57,7 +57,7 @@ class LogExpandedContent extends StatelessWidget {
   }
 
   /// Build view selector chip for expanded content
-  Widget _buildViewChip(String label, String viewType) {
+  Widget _buildViewChip(String label, String viewType, BuildContext context) {
     final isSelected = selectedView == viewType;
 
     // Don't show response chip for pending logs
@@ -71,7 +71,7 @@ class LogExpandedContent extends StatelessWidget {
       onSelected: (selected) {
         onViewChanged(selected ? viewType : null);
       },
-      backgroundColor: isSelected ? Colors.blue[50] : Colors.grey[100],
+      backgroundColor: isSelected ? Colors.blue[50] : Theme.of(context).colorScheme.surfaceContainerLow,
       selectedColor: Colors.blue[100],
       checkmarkColor: Colors.blue[700],
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -284,8 +284,6 @@ class _ContentSectionState extends State<ContentSection> {
                     fontWeight:
                         widget.isSecondary ? FontWeight.w500 : FontWeight.bold,
                     fontSize: widget.isSecondary ? 11 : 12,
-                    color:
-                        widget.isSecondary ? Colors.grey[700] : Colors.black87,
                   ),
                 ),
               ),
